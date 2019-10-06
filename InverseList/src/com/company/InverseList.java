@@ -38,13 +38,16 @@ public class InverseList {
 
     //should reverse list
     public static Node reverseList(Node list) {
-        Node reversedList = new Node(list.getValue(), null);
         Node current = list.getNext();
+        list.setNext(null);
+        Node tmp;
         while (current != null) {
-            reversedList = new Node(current.getValue(), reversedList);
+            tmp = current;
             current = current.getNext();
+            tmp.setNext(list);
+            list = tmp;
         }
-        return reversedList;
+        return list;
     }
 
     public static void main(String[] args) {
@@ -53,9 +56,9 @@ public class InverseList {
         list = new Node(3, list);
         list = new Node(4, list);
         list = new Node(5, list);
-        Node reversedList = reverseList(list);
         list.print();
-        reversedList.print();
+        list = reverseList(list);
+        list.print();
     }
 
 }
